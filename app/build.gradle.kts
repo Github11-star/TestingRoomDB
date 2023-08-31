@@ -1,7 +1,11 @@
+import org.apache.tools.ant.util.JavaEnvUtils.VERSION_1_8
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
+    id("jacoco")
+    //id("org.jetbrains.kotlinx.kover")
 }
 
 android {
@@ -26,6 +30,13 @@ android {
                 "proguard-rules.pro"
             )
         }
+        debug {
+            enableAndroidTestCoverage = true
+        }
+
+       /* getByName("debug") {
+            enableAndroidTestCoverage = true
+        }*/
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -67,4 +78,5 @@ dependencies {
     androidTestImplementation ("androidx.test:rules:1.5.0")
     androidTestImplementation ("androidx.test:runner:1.5.2")
     androidTestImplementation ("androidx.test:core-ktx:1.5.0")
+    //kover(project(":another:project"))
 }
